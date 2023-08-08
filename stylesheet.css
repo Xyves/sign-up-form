@@ -117,10 +117,12 @@ invalid input {
   border-radius: 10px;
   color: white;
   letter-spacing: -1px;
+  margin-top: 40px;
 }
 .center {
   align-items: center;
 }
 .logIn {
   color: white;
+  margin-left: 2em;
 }
