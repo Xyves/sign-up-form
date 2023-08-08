@@ -7,6 +7,7 @@ html {
   overflow: hidden;
 }
 #container {
+  background-color: rgb(32, 35, 37);
   display: flex;
   height: 100%;
 }
@@ -31,10 +32,8 @@ html {
   width: 80%;
 }
 .text {
-  flex-direction: row;
-  background-color: rgb(181, 209, 233);
+  color: white;
   height: 30vh;
-  width: calc(60vw - 40px);
   padding: 1rem 2rem;
   margin: 0;
 }
@@ -43,31 +42,29 @@ html {
   margin: 10rem 6rem 2rem 1.5rem;
 }
 .text span {
-  height: auto;
-  width: auto;
   display: block;
   padding-top: 2rem;
 }
 .form-register {
-  flex: 1;
   box-shadow: 0px 10px 5px #888, 0px -5px 5px #888;
   font-size: 2rem;
   flex-direction: column;
   justify-content: space-between;
   justify-content: center;
-  background-image: url(img/form-wallpaper.jpg);
   height: 70vh;
+  width: 100%;
   box-sizing: border-box;
   align-items: center;
 }
 .content {
   flex-direction: column;
+  flex: 1.5;
 }
 .form-columns {
   display: flex;
-  margin-left: 5rem;
   padding: 2rem;
-  width: 80%;
+  width: 100%;
+  background-color: rgb(24, 26, 27);
 }
 
 .form-column {
@@ -84,29 +81,46 @@ html {
 }
 
 input {
-  width: 100%;
-  font-size: 2rem;
+  width: 70%;
+  font-size: 1.55rem;
 }
 .form-row label {
   color: rgb(255, 255, 255);
   margin-bottom: -3px;
   display: block;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 .error-text {
   color: red;
-  font-size: 0.7rem;
+  font-size: 1rem;
   margin-top: 0;
+  width: 70%;
 }
 .input-field input {
-  height:100%;
-  width:100%;
-  outline:none;
-  border:none;
-  border-radius:8px;
-  padding 0 15px;
-  border:1px solid #d1d1d1;
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  padding: 0 15px;
+  border: 1px solid #d1d1d1;
 }
 invalid input {
-  border-color:#d93025;
+  border-color: #d93025;
+}
+#submitButton {
+  width: 25%;
+  padding: 0.5rem 1rem;
+  font-size: 2rem;
+  background-color: rgb(173, 73, 173);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  letter-spacing: -1px;
+}
+.center {
+  align-items: center;
+}
+.logIn {
+  color: white;
 }

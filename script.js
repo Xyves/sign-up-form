@@ -5,78 +5,87 @@ document.addEventListener("DOMContentLoaded", function () {
   const submitButton = myForm.querySelector("#submitButton");
   const firstName = myForm.querySelector("#first-name");
   const emailField = myForm.querySelector(".email-field");
-  const last_name = myForm.querySelector("#last-name");
+  const lastName = myForm.querySelector("#last-name");
   const phone = myForm.querySelector("#phone");
   const error = document.querySelector("#error");
-  const firstNameError = document.querySelector(".firstNameError .error-text");
-  const lastNameError = document.querySelector(".lastNameError .error-text");
-  const phoneError = document.querySelector(".phoneError .error-text");
-  const emailError = document.querySelector(".emailError .error-text");
-  const passError = document.querySelector(".passwordError .error-text");
-  const confirmpassError = document.querySelector(
-    ".confirmPasswordError .error-text"
-  );
+  const errorElements = {
+    firstName: document.querySelector(".firstNameError .error-text"),
+    lastName: document.querySelector(".lastNameError .error-text"),
+    email: document.querySelector(".emailError .error-text"),
+    phone: document.querySelector(".phoneError .error-text"),
+    password: document.querySelector(".passwordError .error-text"),
+    confirmPassword: document.querySelector(
+      ".confirmPasswordError .error-text"
+    ),
+  };
 
-  // Email Validation
+  // Check password using pattern on focus lost
+  password.addEventListener("blur", function () {
+    if (!CheckPassword(password.value)) {
+      setError(errorElements.password, "Password pattern is incorrect");
+    } else {
+      setError(errorElements.password, "");
+    }
+  });
+
+  // Set error messages
+  function setError(element, message) {
+    element.innerText = message;
+  }
+
+  // Clear error messages
+  function clearErrors() {
+    for (const key in errorElements) {
+      setError(errorElements[key], "");
+    }
+  }
+
+  // Check if the password fulfills the pattern
   function CheckPassword(password) {
     let pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
     return pattern.test(password);
   }
 
   function validation() {
+    clearErrors();
+
     if (firstName.value === "") {
-      firstNameError.innerText = "** Please write your name in the Box**";
-    } else {
-      firstNameError.innerText = "";
+      setError(
+        errorElements.firstName,
+        "** Please write your name in the Box**"
+      );
     }
 
-    if (last_name.value === "") {
-      lastNameError.innerText = "** Please write your last name in the Box**";
-    } else {
-      lastNameError.innerText = "";
+    if (lastName.value === "") {
+      setError(
+        errorElements.lastName,
+        "** Please write your last name in the Box**"
+      );
     }
 
     if (emailField.value === "") {
-      emailError.innerText = "** Please write your email in the Box**";
-    } else {
-      emailError.innerText = "";
+      setError(errorElements.email, "** Please write your email in the Box**");
     }
 
     if (phone.value === "") {
-      phoneError.innerText = "** Please write your phone number in the Box**";
-    } else {
-      phoneError.innerText = "";
+      setError(
+        errorElements.phone,
+        "** Please write your phone number in the Box**"
+      );
     }
 
     if (!CheckPassword(password.value)) {
-      passError.innerText = "** Password format is incorrect**";
-    } else {
-      passError.innerText = "";
-      errorIcon.style.display = "none";
-      //    TODO:
-      // Dodać errorIcon uzywajac DOM'a
-      // Implementacja automatycznego wyboru ikony zależnie od miejsca w którym wystepuje błąd
+      setError(errorElements.password, "** Password format is incorrect**");
+    }
+
+    if (password.value !== confirmPass.value) {
+      setError(errorElements.confirmPassword, "** Passwords don't match**");
     }
   }
 
   // Calling a function on Form Submit
   myForm.addEventListener("submit", (e) => {
-    let messages = [];
-    if (firstName.value === "" || firstName.value === null) {
-      messages.push("Name is required");
-    }
-    if (messages.length > 0) {
-      e.preventDefault();
-      error.innerText = messages.join(", ");
-    }
-  });
-
-  myForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-    if (CheckPassword(password.value) && password.value === confirmPass.value) {
-      confirmpassError.innerText = "** Passwords match**";
-    } else {
-      confirmpassError.innerText = "** Passwords don't match**";
-    }
+    e.preventDefault();
+    validation();
   });
 });
